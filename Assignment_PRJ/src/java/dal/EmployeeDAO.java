@@ -176,8 +176,7 @@ public class EmployeeDAO extends DBContext {
         System.out.println(list.get(0).getTimesheets().get(1).getP().getPname());
 
         System.out.println("================Salary================");
-        System.out.println(list.get(0).getSumSalaryWorking(1));
-        System.out.println(list.get(0).getSumSalaryWorking(2));
-        System.out.println(list.get(0).getSumSalaryWorking(3));
+        System.out.println(list.get(1).getSumSalaryWorking());
+
     }
 }

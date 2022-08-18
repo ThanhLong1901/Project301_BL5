@@ -61,11 +61,12 @@ public class Employee {
     }
     
     //Tổng Lương cả Tháng của Nhân Viên
-    public int getSumSalaryWorking(int pid){
+    public int getSumSalaryWorking(){
         int sum = 0;
-        int amount = getSumAmoutProductWorking(pid);
         for (TimeSheet timesheet : timesheets) {
-            sum += timesheet.getP().getPprice()*amount;
+//            if(timesheet.getP().getPid() == pid){
+                sum += (timesheet.getP().getPprice()* timesheet.getAmount());
+//            }
         }
         return sum;
     }

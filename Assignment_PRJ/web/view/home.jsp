@@ -62,24 +62,22 @@
                         </c:forEach>--%>
 
                     </c:forEach> 
+
+                    <%--Tổng số lượng từng loại--%>    
                     <c:forEach items="${listP}" var="lp">
                         <c:set value="${lp.pid}" var="pid"/>
                         <td>${lnv.getSumAmoutProductWorking(pid)}</td>
                     </c:forEach>
-                    <!--                    <td>Tổng 1</td>
-                                        <td>Tổng 2</td>
-                                        <td>Tổng 3</td>-->
 
+                    <%--Tổng tất cả số lượng tất cả các loại--%>     
                     <td>${lnv.getSumAmoutAllProductWorking()}</td>
-                    <!--<td>-->
-                            <%--<c:set value="${lp.pid}" var="pid"/>--%>
-                            <%--<c:set value="${lnv.timesheets}" var="ts"/>--%>
-                        <%--<td>${lnv.getSumAmoutProductWorking(pid) * ts.getAmount()}</td>--%>
-                    <%--</c:forEach>--%>
-                    <!--</td>-->
-                </tr>
-            </c:forEach>
 
+                    <%--Tổng lương--%>
+                    <!--<td>Lương</td>-->
+                    <td>${lnv.getSumSalaryWorking()}</td>
+                </tr>
+
+            </c:forEach>
         </table>
     </body>
 </html>
