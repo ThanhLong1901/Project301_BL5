@@ -49,6 +49,17 @@ public class Employee {
         return sum;
     }
     
+    //Tổng số lượng ngày đi làm của nhân viên
+    public int getAllDayWorking(){
+        int sum = 0;
+        for (TimeSheet timesheet : timesheets) {
+            if(timesheet.getDates().toString() != ""){
+                sum++;
+            }
+        }
+        return sum;
+    }
+    
     //Tổng số lượng của 1 sản phẩm mà 1 nhân viên làm trong tất cả các ngày
     public int getSumAmoutProductWorking(int pid) {
         int sum = 0;
@@ -64,9 +75,7 @@ public class Employee {
     public int getSumSalaryWorking(){
         int sum = 0;
         for (TimeSheet timesheet : timesheets) {
-//            if(timesheet.getP().getPid() == pid){
                 sum += (timesheet.getP().getPprice()* timesheet.getAmount());
-//            }
         }
         return sum;
     }

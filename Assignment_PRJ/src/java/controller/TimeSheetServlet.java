@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.DayOffDAO;
 import dal.EmployeeDAO;
 import dal.ProductDAO;
 import helper.DateTimeHelper;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
+import model.DayOffType;
 import model.Employee;
 import model.Product;
 import model.ViewDate;
@@ -73,13 +75,20 @@ public class TimeSheetServlet extends HttpServlet {
         
         //Sử lý phần Nhân Viên
         EmployeeDAO nvd = new EmployeeDAO();
-        ArrayList<Employee> listE = nvd.getListNV2(begin, end);
+        ArrayList<Employee> listE = nvd.getListEmployee(begin, end);
         request.setAttribute("listE", listE);
         
-        //Sử lý sản phẩm
-        ProductDAO spd = new ProductDAO();
-        ArrayList<Product> listP = spd.getListSP();
-        request.setAttribute("listP", listP);
+//        //Sử lý sản phẩm
+//        ProductDAO spd = new ProductDAO();
+//        ArrayList<Product> listP = spd.getListSP();
+//        request.setAttribute("listP", listP);
+
+        //Sử lý phần ký hiệu chấm công
+        DayOffDAO dod = new DayOffDAO();
+        ArrayList<DayOffType> listDOT = dod.getListDOT();
+        int sizeDOT = listDOT.size();
+        request.setAttribute("listDOT", listDOT);
+        request.setAttribute("sizeDOT", sizeDOT);
         request.getRequestDispatcher("view/home.jsp").forward(request, response);
     } 
 

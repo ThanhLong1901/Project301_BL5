@@ -1,6 +1,6 @@
 <%-- 
-    Document   : home
-    Created on : Aug 16, 2022, 10:12:11 PM
+    Document   : demo
+    Created on : Aug 16, 2022, 11:31:00 AM
     Author     : Long
 --%>
 
@@ -14,70 +14,85 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h2 style="text-align: center">BẢNG CHẤM CÔNG</h2>
         <table border="1">
+            <tr>    
+                <th rowspan="3">STT</th>
+                <th rowspan="3">Họ tên</th>
+
+                <%--colspan = số lượng cột loại ngày trong tháng--%>
+                <th colspan="31">Ngày Trong Tháng</th>  
+                <th rowspan="3">Tổng Cộng</th>
+
+                <%--colspan = số lượng cột loại nghỉ phép--%>
+                <th colspan="${sizeDOT}" rowspan="2">Ngày nghỉ</th>
+            </tr>
+
             <tr>
-                <th rowspan="2">Nhân Viên</th>
-                    <%--List Ngày Trong Tháng--%>
-                    <c:forEach items="${dates}" var="d">   
-                    <th colspan="3">
-                        <fmt:formatDate pattern = "EEE dd-MM" value = "${d.value}"/>
+                <%--Cột Ngày Trong Tháng Hàng Thứ--%>
+                <c:forEach items="${dates}" var="dates">
+                    <th>
+                        <fmt:formatDate pattern = "EEE" value = "${dates.value}" /> <br/>
                     </th>
                 </c:forEach>
-                <th colspan="3">Tổng</th>
-                <th rowspan="2">Tổng Số Lượng</th>
-                <th rowspan="2">Tổng Lương</th>
             </tr>
-
             <tr>
-                <%--Số Lượng theo List Ngày--%>
-                <c:forEach items="${dates}" var="d"> 
-                    <%--List Sản Phẩm (Cột ngày)--%>  
-                    <c:forEach items="${listP}" var="lp">   
-                        <th>${lp.pname}</th>
-                        </c:forEach>
+                <%--Cột Ngày Trong Tháng Hàng Ngày--%>
+                <c:forEach items="${dates}" var="dates">
+                    <th>
+                        <fmt:formatDate pattern = "dd" value = "${dates.value}" /> <br/>
+                    </th>
+                </c:forEach>
+
+                <%--Cột Ngày Nghỉ--%>
+                <c:forEach items="${listDOT}" var="listDOT">
+                    <th>${listDOT.dotnotation}</th> 
                     </c:forEach>
-                    <%--List Sản Phẩm (Cột tính tổng)--%>
-                    <c:forEach items="${listP}" var="lp">   
-                    <th>${lp.pname}</th>
-                    </c:forEach>
+
             </tr>
 
-            <%--List Nhân Viên--%>
-            <c:forEach items="${listE}" var="lnv">   
+            <%--<c:forEach begin="1" end="5">--%>
+            <c:forEach items="${listE}" var="listE">
                 <tr>
-                    <td>${lnv.ename}</td>
-                    <%--Số Lượng Cột Theo List Ngày--%>
-                    <c:forEach items="${dates}" var="d">   
-                        <td>100</td>
-                        <td>200</td>
-                        <td>310</td>
+                    <%--Cột TT--%>
+                    <td style="text-align: center">${listE.eid}</td>
 
-                        <%--Hiện ra được số được số lượng sản phẩm nhưng chưa đúng ngày--%>
-                        <%--<c:forEach items="${lnv.timesheets}" var="ts">
-                            <c:forEach items="${listP}" var="lp">
-                                <c:if test="${d.value == ts.cidate && ts.p.pid == lp.pid}">
-                                    <td>${ts.getAmount()}</td>
+                    <%--Cột Tên--%>
+                    <td>${listE.ename}</td>
+
+                    <%--Cột Ngày--%>
+                    <c:forEach items="${dates}" var="dates">
+                        <td>
+                            <c:forEach items="${listE.timesheets}" var="lts">
+                                <c:if test="${dates.value eq lts.cidate}">
+                                    L
                                 </c:if>
                             </c:forEach>
-                        </c:forEach>--%>
+                        </td>
+                    </c:forEach>
+                    <td style="text-align: center">${listE.getAllDayWorking()}</td>
 
-                    </c:forEach> 
-
-                    <%--Tổng số lượng từng loại--%>    
-                    <c:forEach items="${listP}" var="lp">
-                        <c:set value="${lp.pid}" var="pid"/>
-                        <td>${lnv.getSumAmoutProductWorking(pid)}</td>
+                    <%--Cột Ngày Nghỉ--%>
+                    <c:forEach items="${listDOT}" var="listDOT">
+                        <th>A</th>
                     </c:forEach>
 
-                    <%--Tổng tất cả số lượng tất cả các loại--%>     
-                    <td>${lnv.getSumAmoutAllProductWorking()}</td>
-
-                    <%--Tổng lương--%>
-                    <!--<td>Lương</td>-->
-                    <td>${lnv.getSumSalaryWorking()}</td>
                 </tr>
-
             </c:forEach>
+
+            <%--</c:forEach>--%>
+        </table>
+
+        <br/><br/><br/>     
+        <span style="font-weight: bold">Ký Hiệu Chấm Công</span>        
+        <table border="1px" width="15%" style="margin-top: 10px">
+            <c:forEach items="${listDOT}" var="listDOT">
+                <tr>
+                    <td width="80%">${listDOT.dottitle}</td>
+                    <td width="20%" style="text-align: center">${listDOT.dotnotation}</td>
+                </tr>
+            </c:forEach>
+
         </table>
     </body>
 </html>

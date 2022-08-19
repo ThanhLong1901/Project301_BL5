@@ -44,7 +44,6 @@ public class TimeSheet {
         this.p = p;
     }
 
-    //Số lượng sản phẩm làm trong ngày
     public int getAmount() {
         return amount;
     }
