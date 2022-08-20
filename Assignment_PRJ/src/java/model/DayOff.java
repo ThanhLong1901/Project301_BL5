@@ -4,6 +4,7 @@
  */
 package model;
 
+import helper.DateTimeHelper;
 import java.util.Date;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Date;
  * @author Long
  */
 public class DayOff {
+
     private int doid;
     private Employee e;
     private Date fromdate;
@@ -56,6 +58,8 @@ public class DayOff {
     public void setDot(DayOffType dot) {
         this.dot = dot;
     }
-    
-    
+
+    public float getDays() {
+        return DateTimeHelper.diffHours(fromdate, todate) / 24 + 1;
+    }
 }

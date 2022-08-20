@@ -80,6 +80,13 @@ public class DateTimeHelper {
         return new Timestamp(data.getTime());
     }
     
+    public static float diffHours(Date start, Date end)
+    {
+       long diff = end.getTime() - start.getTime();
+       float hours = ((diff/1000)*(1.0f))/3600;
+       return hours;
+    }
+    
     public static void main(String[] args) {
         Date date = new Date();
         Calendar c = Calendar.getInstance();

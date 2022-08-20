@@ -17,21 +17,21 @@
         <h2 style="text-align: center">BẢNG CHẤM CÔNG</h2>
         <table border="1">
             <tr>    
-                <th rowspan="3">STT</th>
-                <th rowspan="3">Họ tên</th>
+                <th rowspan="3" style="background-color: #FF5900">STT</th>
+                <th rowspan="3" style="background-color: #FF5900">Họ tên</th>
 
                 <%--colspan = số lượng cột loại ngày trong tháng--%>
-                <th colspan="31">Ngày Trong Tháng</th>  
-                <th rowspan="3">Tổng Cộng</th>
+                <th colspan="31" style="background-color: #FF5900">Ngày Trong Tháng</th>  
+                <th rowspan="3" style="background-color: #FF5900">Tổng Cộng</th>
 
                 <%--colspan = số lượng cột loại nghỉ phép--%>
-                <th colspan="${sizeDOT}" rowspan="2">Ngày nghỉ</th>
+                <th colspan="${sizeDOT-1}" rowspan="2" style="background-color: #FF5900">Ngày nghỉ</th>
             </tr>
 
             <tr>
                 <%--Cột Ngày Trong Tháng Hàng Thứ--%>
                 <c:forEach items="${dates}" var="dates">
-                    <th>
+                    <th style="background-color: orange">
                         <fmt:formatDate pattern = "EEE" value = "${dates.value}" /> <br/>
                     </th>
                 </c:forEach>
@@ -39,14 +39,14 @@
             <tr>
                 <%--Cột Ngày Trong Tháng Hàng Ngày--%>
                 <c:forEach items="${dates}" var="dates">
-                    <th>
+                    <th style="background-color: #FFD78D">
                         <fmt:formatDate pattern = "dd" value = "${dates.value}" /> <br/>
                     </th>
                 </c:forEach>
 
                 <%--Cột Ngày Nghỉ--%>
-                <c:forEach items="${listDOT}" var="listDOT">
-                    <th>${listDOT.dotnotation}</th> 
+                <c:forEach items="${listDOT}" var="listDOT" begin="1">
+                    <th style="background-color: #FFD78D">${listDOT.dotnotation}</th> 
                     </c:forEach>
 
             </tr>
@@ -62,21 +62,56 @@
 
                     <%--Cột Ngày--%>
                     <c:forEach items="${dates}" var="dates">
-                        <td>
+                        <td 
+                            <c:if test="${dates.dow eq 1 or dates.dow eq 7}">
+                                style="background-color: #F8CBAD" 
+                            </c:if>
+                                style="text-align: center"
+                            >
                             <c:forEach items="${listE.timesheets}" var="lts">
                                 <c:if test="${dates.value eq lts.cidate}">
                                     L
                                 </c:if>
                             </c:forEach>
+                            <c:forEach items="${listE.dayoff}" var="lrs">
+                                <c:if test="${dates.value >= lrs.fromdate and dates.value <= lrs.todate}">
+                                    <c:choose>
+                                        <c:when test="${lrs.dot.dotid == 2 and lrs.e.eid == listE.eid}">
+                                            Ô
+                                        </c:when>
+                                        <c:when test="${lrs.dot.dotid == 4 and lrs.e.eid == listE.eid}">
+                                            TS
+                                        </c:when>
+                                        <c:when test="${lrs.dot.dotid == 5 and lrs.e.eid == listE.eid}">
+                                            T
+                                        </c:when>
+                                        <c:when test="${lrs.dot.dotid == 6 and lrs.e.eid == listE.eid}">
+                                            CN
+                                        </c:when>
+                                        <c:when test="${lrs.dot.dotid == 7 and lrs.e.eid == listE.eid}">
+                                            NL
+                                        </c:when>
+                                        <c:when test="${lrs.dot.dotid == 8 and lrs.e.eid == listE.eid}">
+                                            NB
+                                        </c:when>
+                                        <c:when test="${lrs.dot.dotid == 9 and lrs.e.eid == listE.eid}">
+                                            NP
+                                        </c:when>
+                                    </c:choose>
+                                </c:if>
+                            </c:forEach>
                         </td>
                     </c:forEach>
+
+                    <%--Cột Tổng Ngày Đi Làm--%>    
                     <td style="text-align: center">${listE.getAllDayWorking()}</td>
 
                     <%--Cột Ngày Nghỉ--%>
-                    <c:forEach items="${listDOT}" var="listDOT">
-                        <th>A</th>
+                    <c:forEach items="${listDOT}" var="listDOT" begin="1">
+                        <td style="text-align: center">
+                            ${listE.getSumDayOff(listDOT.dotid)}                        
+                        </td>
                     </c:forEach>
-
                 </tr>
             </c:forEach>
 
