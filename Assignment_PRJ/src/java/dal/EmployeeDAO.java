@@ -71,7 +71,7 @@ public class EmployeeDAO extends DBContext {
         return list;
     }
 
-    public ArrayList<DayOff> getListDOTEmployee1(Date from, Date end, int eid) {
+    public ArrayList<DayOff> getListDOTEmployee(Date from, Date end, int eid) {
         ArrayList<DayOff> list = new ArrayList<>();
         try {
             String sql = "select e.eid, e.ename, ISNULL(do.doid, -1) as doid, do.fromdate, do.todate, dot.dotid, dot.dottitle, dot.dotnotation"

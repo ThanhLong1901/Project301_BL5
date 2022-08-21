@@ -18,8 +18,8 @@
     </head>
     <body>
         <h2 style="text-align: center">BẢNG TÍNH LƯƠNG</h2>
-        <table border="1">
-            <tr>
+        <table border="1" width="50%">
+            <tr style="background-color: #FF7A00">
                 <th>Họ Tên</th>
                 <th>Mã Sản Phẩm</th>
                 <th>Tên Sản Phẩm</th>
@@ -29,20 +29,26 @@
             </tr>
             <c:forEach items="${listE}" var="listE">
                 <c:forEach items="${listP}" var="listP">
-                    <tr>
-                        <td>${listE.ename}</td>
+                    <tr style="background-color: #F5F5DC">
+                        <td style="background-color: #FFD78D">${listE.ename}</td>
                         <td style="text-align: center">${listP.pid}</td>
                         <td>${listP.pname}</td>
                         <td style="text-align: center">${listP.pprice}</td>
                         <td style="text-align: center">${listE.getSumAmoutProductWorking(listP.pid)}</td>
                         <!--<td></td>-->
-                        <td>
+                        <td style="text-align: center; color: red">
                             <fmt:formatNumber type="number" maxFractionDigits = "3" value="${listE.getSumSalaryProductWorking(listP.pid)}"></fmt:formatNumber>
                         </td>
                     </tr>
                 </c:forEach>
-
             </c:forEach> 
         </table>
+        <br/><br/>
+        <span style="margin-top: 50px">
+            <a href="home" 
+               style="background-color: #FFD78D; padding: 10px 20px; border-radius: 20px;
+               text-decoration: none; color: black"
+               >Bản Chấm Công của nhân viên</a>
+        </span>
     </body>
 </html>

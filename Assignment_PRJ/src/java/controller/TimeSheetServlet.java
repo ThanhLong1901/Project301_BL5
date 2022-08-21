@@ -82,7 +82,7 @@ public class TimeSheetServlet extends HttpServlet {
 
         //Sử Lý Chấm Công Phần Nghỉ
         for (int i = 0; i < listE.size(); i++) {
-                listE.get(i).setDayoff(nvd.getListDOTEmployee1(begin, end, listE.get(i).getEid()));
+                listE.get(i).setDayoff(nvd.getListDOTEmployee(begin, end, listE.get(i).getEid()));
         }
         request.setAttribute("listE", listE);
 

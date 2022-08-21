@@ -74,7 +74,6 @@ public class SalaryServlet extends HttpServlet {
         ArrayList<Product> listP = pd.getListSP();
         request.setAttribute("listP", listP);
         
-
         request.getRequestDispatcher("view/salary.jsp").forward(request, response);
     } 
 
