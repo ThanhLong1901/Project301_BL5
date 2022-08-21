@@ -120,10 +120,10 @@ public class EmployeeDAO extends DBContext {
         Date end = DateTimeHelper.addDays(DateTimeHelper.addMonths(begin, 1), -1);   //Lấy ngày cuối cùng trong tháng hiện tại
 
         ArrayList<Employee> list = nvd.getListEmployee(begin, end);
-
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setDayoff(nvd.getListDOTEmployee1(begin, end, i));
-        }
+        System.out.println(list.get(0).getSumAmoutProductWorking(0));
+//        for (int i = 0; i < list.size(); i++) {
+//            list.get(i).setDayoff(nvd.getListDOTEmployee1(begin, end, i));
+//        }
 //        //Tổng tất cả sản phẩm của nhân viên thứ 1       
 //        System.out.print("Tổng tất cả sản phẩm trong tháng của NV1: ");
 //        System.out.println(list.get(4).getSumAmoutAllProductWorking());
@@ -144,8 +144,10 @@ public class EmployeeDAO extends DBContext {
 //        System.out.println(list.get(1).getSumSalaryWorking());
 
 //            System.out.println(list.get(1).getDayoff().get(1).getFromdate());
-        long diff = end.getTime() - begin.getTime();
-       float hours = ((diff/1000)*(1.0f))/3600;
-        System.out.println(hours/24 + 1);
+    
+
+//        long diff = end.getTime() - begin.getTime();
+//       float hours = ((diff/1000)*(1.0f))/3600;
+//        System.out.println(hours/24 + 1);
     }
 }

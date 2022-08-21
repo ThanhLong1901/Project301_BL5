@@ -15,17 +15,17 @@
     </head>
     <body>
         <h2 style="text-align: center">BẢNG CHẤM CÔNG</h2>
-        <table border="1">
+        <table border="1" style="background-color: beige    ">
             <tr>    
                 <th rowspan="3" style="background-color: #FF5900">STT</th>
-                <th rowspan="3" style="background-color: #FF5900">Họ tên</th>
+                <th rowspan="3" style="background-color: #FF5900">Họ Tên</th>
 
                 <%--colspan = số lượng cột loại ngày trong tháng--%>
                 <th colspan="31" style="background-color: #FF5900">Ngày Trong Tháng</th>  
                 <th rowspan="3" style="background-color: #FF5900">Tổng Cộng</th>
 
                 <%--colspan = số lượng cột loại nghỉ phép--%>
-                <th colspan="${sizeDOT-1}" rowspan="2" style="background-color: #FF5900">Ngày nghỉ</th>
+                <th colspan="${sizeDOT-1}" rowspan="2" style="background-color: #FF5900">Ngày Nghỉ</th>
             </tr>
 
             <tr>
@@ -55,10 +55,10 @@
             <c:forEach items="${listE}" var="listE">
                 <tr>
                     <%--Cột TT--%>
-                    <td style="text-align: center">${listE.eid}</td>
+                    <td style="text-align: center;background-color: orange">${listE.eid}</td>
 
                     <%--Cột Tên--%>
-                    <td>${listE.ename}</td>
+                    <td style="background-color: #FFD78D">${listE.ename}</td>
 
                     <%--Cột Ngày--%>
                     <c:forEach items="${dates}" var="dates">
@@ -70,32 +70,32 @@
                             >
                             <c:forEach items="${listE.timesheets}" var="lts">
                                 <c:if test="${dates.value eq lts.cidate}">
-                                    L
+                                    <a style="color: green">L</a>
                                 </c:if>
                             </c:forEach>
                             <c:forEach items="${listE.dayoff}" var="lrs">
                                 <c:if test="${dates.value >= lrs.fromdate and dates.value <= lrs.todate}">
                                     <c:choose>
                                         <c:when test="${lrs.dot.dotid == 2 and lrs.e.eid == listE.eid}">
-                                            Ô
+                                            <a style="color: red">Ô</a>
                                         </c:when>
                                         <c:when test="${lrs.dot.dotid == 4 and lrs.e.eid == listE.eid}">
-                                            TS
+                                            <a style="color: red">TS</a>
                                         </c:when>
                                         <c:when test="${lrs.dot.dotid == 5 and lrs.e.eid == listE.eid}">
-                                            T
+                                            <a style="color: red">T</a>
                                         </c:when>
                                         <c:when test="${lrs.dot.dotid == 6 and lrs.e.eid == listE.eid}">
-                                            CN
+                                            <a style="color: red">CN</a>
                                         </c:when>
                                         <c:when test="${lrs.dot.dotid == 7 and lrs.e.eid == listE.eid}">
-                                            NL
+                                            <a style="color: red">NL</a>
                                         </c:when>
                                         <c:when test="${lrs.dot.dotid == 8 and lrs.e.eid == listE.eid}">
-                                            NB
+                                            <a style="color: red">NB</a>
                                         </c:when>
                                         <c:when test="${lrs.dot.dotid == 9 and lrs.e.eid == listE.eid}">
-                                            NP
+                                            <a style="color: red">NP</a>
                                         </c:when>
                                     </c:choose>
                                 </c:if>
@@ -123,8 +123,8 @@
         <table border="1px" width="15%" style="margin-top: 10px">
             <c:forEach items="${listDOT}" var="listDOT">
                 <tr>
-                    <td width="80%">${listDOT.dottitle}</td>
-                    <td width="20%" style="text-align: center">${listDOT.dotnotation}</td>
+                    <td width="80%" style="background-color: orange">${listDOT.dottitle}</td>
+                    <td width="20%" style="text-align: center; background-color: #FFD78D">${listDOT.dotnotation}</td>
                 </tr>
             </c:forEach>
 

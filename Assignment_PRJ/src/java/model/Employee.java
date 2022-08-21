@@ -70,6 +70,17 @@ public class Employee {
     }
     
     //Tổng Lương cả Tháng của Nhân Viên
+    public int getSumSalaryProductWorking(int pid){
+        int sum = 0;
+        for (TimeSheet timesheet : timesheets) {
+            if(timesheet.getP().getPid() == pid){
+                sum += (timesheet.getP().getPprice()* timesheet.getAmount());
+            }   
+        }
+        return sum;
+    }
+    
+    //Tổng Lương cả Tháng của Nhân Viên
     public int getSumSalaryWorking(){
         int sum = 0;
         for (TimeSheet timesheet : timesheets) {

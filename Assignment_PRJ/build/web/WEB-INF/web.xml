@@ -4,9 +4,17 @@
         <servlet-name>TimeSheetServlet</servlet-name>
         <servlet-class>controller.TimeSheetServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SalaryServlet</servlet-name>
+        <servlet-class>controller.SalaryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TimeSheetServlet</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SalaryServlet</servlet-name>
+        <url-pattern>/salary</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
